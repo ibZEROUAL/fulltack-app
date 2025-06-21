@@ -2,7 +2,6 @@ package com.productmanager.auth;
 
 
 import com.productmanager.config.JwtService;
-import com.productmanager.enums.Role;
 import com.productmanager.exception.UserNotFoundException;
 import com.productmanager.model.User;
 import com.productmanager.repository.UserRepository;
@@ -32,8 +31,11 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
 
-        User newUser = new User(registerRequest.getFullName(),registerRequest.getUsername(),passwordEncoder.encode(registerRequest.getPassword()));
+        if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()){
+            throw new RuntimeException("Email Already existe !! ");
+        }
 
+        User newUser = new User(registerRequest.getFullName(),registerRequest.getUsername(),passwordEncoder.encode(registerRequest.getPassword()));
         userRepository.save(newUser);
         return getAuthenticationResponse(newUser);
     }
