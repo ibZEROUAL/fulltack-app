@@ -1,6 +1,7 @@
 package com.productmanager.service;
 
 import com.productmanager.dto.ProductDto;
+import com.productmanager.exception.ProductNotFoundException;
 import com.productmanager.mapper.ProductMapper;
 import com.productmanager.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,18 +23,18 @@ public class ProductService {
     }
 
     public ProductDto getById(Long id){
-        var product = productRepository.findById(id).orElseThrow(null);
+        var product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         return productMapper.toDto(product);
     }
 
     public ProductDto update(Long id, ProductDto dto){
-       var product = productRepository.findById(id).orElseThrow(null);
+       var product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
        var updatedProduct = productMapper.partialUpdate(dto, product);
        return productMapper.toDto(updatedProduct);
     }
 
     public void delete(Long id){
-        var product = productRepository.findById(id).orElseThrow(null);
+        var product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         productRepository.delete(product);
     }
 
