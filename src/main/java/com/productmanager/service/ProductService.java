@@ -27,10 +27,14 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
+    public ProductDto add(ProductDto productDto){
+        return productMapper.toDto(productRepository.save(productMapper.toEntity(productDto)));
+    }
+
     public ProductDto update(Long id, ProductDto dto){
        var product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
        var updatedProduct = productMapper.partialUpdate(dto, product);
-       return productMapper.toDto(updatedProduct);
+       return productMapper.toDto(productRepository.save(updatedProduct));
     }
 
     public void delete(Long id){
