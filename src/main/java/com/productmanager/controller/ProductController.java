@@ -2,6 +2,7 @@ package com.productmanager.controller;
 
 import com.productmanager.dto.ProductDto;
 import com.productmanager.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto dto){
+    public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto dto){
         return ResponseEntity.ok(productService.add(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto dto){
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,@Valid @RequestBody ProductDto dto){
         return ResponseEntity.ok(productService.update(id,dto));
     }
 
