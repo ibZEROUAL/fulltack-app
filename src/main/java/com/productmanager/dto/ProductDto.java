@@ -13,17 +13,21 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 public class ProductDto implements Serializable {
-    Long id;
+    private Long id;
 
     @NotNull(message = "Name cannot be null")
     @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
-    String name;
+    private String name;
 
     @NotNull(message = "Description cannot be null")
     @Size(min = 20, max = 100, message = "Description must be between 20 and 100 characters")
-    String description;
+    private String description;
 
     @NotNull(message = "Quantity cannot be null")
     @Positive
-    Long quantity;
+    private Double price;
+
+    @NotNull(message = "Quantity cannot be null")
+    @Positive
+    private Long quantity;
 }
