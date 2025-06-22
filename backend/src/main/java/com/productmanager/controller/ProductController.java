@@ -27,7 +27,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
+    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id){
         return ResponseEntity.ok(productService.getById(id));
     }
 
@@ -39,13 +39,13 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,@Valid @RequestBody ProductDto dto){
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long id,@Valid @RequestBody ProductDto dto){
         return ResponseEntity.ok(productService.update(id,dto));
     }
 
     @DeleteMapping("/{id}")
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id){
         productService.delete(id);
         return ResponseEntity.ok().build();
     }
