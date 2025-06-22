@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: product-manager
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/product_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: true
+    depends_on:
+      - db
+    networks:
+      - product_network
+
+  db:
+    image: mysql:8.0.1
+    container_name: mysql_db
+    environment:
+      MYSQL_DATABASE: product_db
+      MYSQL_ROOT_PASSWORD:
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - product_network
+
+networks:
+  product_network:
+    driver: bridge
+
+volumes:
+  db_data:
