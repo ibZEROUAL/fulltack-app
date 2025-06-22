@@ -20,7 +20,7 @@ public class ProductDto implements Serializable {
     private String name;
 
     @NotNull(message = "Description cannot be null")
-    @Size(min = 20, max = 100, message = "Description must be between 20 and 100 characters")
+    @Size(min = 10, max = 100, message = "Description must be between 10 and 100 characters")
     private String description;
 
     @NotNull(message = "Quantity cannot be null")

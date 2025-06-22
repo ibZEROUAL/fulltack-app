@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class ProductController {
     @PostMapping
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto dto){
-        return ResponseEntity.ok(productService.add(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.add(dto));
     }
 
     @PutMapping("/{id}")
@@ -44,8 +45,9 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @Operation(security = @SecurityRequirement(name = "bearerAuth"))
-    public void deleteProduct(@PathVariable Long id){
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
         productService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 
