@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   app:
-    container_name: product-manager
-    restart: on-failure
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: product-manager
+    restart: on-failure
     ports:
       - "8080:8080"
     environment:
@@ -21,11 +21,11 @@ services:
       - product_network
 
   db:
-    image: mysql:8.0.1
-    container_name: mysql_db
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: product_db
       MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
     ports:
       - "3306:3306"
     volumes:
