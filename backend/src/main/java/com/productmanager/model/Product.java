@@ -24,4 +24,11 @@ public class Product {
 
     private Long quantity;
 
+    public Product(Long id, String name, String description, Double price, Long quantity) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
