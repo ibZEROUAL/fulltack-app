@@ -17,7 +17,7 @@ Follow these steps to run the REST API (after cloning this repo ):
 
 <h6>Step 1: cd backend</h6>
 
-<h6>Step 2: Generate App.jar using  "./mvnw clean install -DskipTests"</h6>
+<h6>Step 2: Generate App.jar using  "./mvnw clean install"</h6>
 
 <h6>Step 3: Build and Run with Docker Compose with  "docker compose up" 
 this will create containers for mysql database and spring app.</h6>
